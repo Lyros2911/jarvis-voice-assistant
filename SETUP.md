@@ -152,7 +152,17 @@ Wenn ein Nutzer "Richte Jarvis ein" sagt, fuehre folgende Schritte aus:
 - Installiere Playwright Browser: `playwright install chromium`
 
 **Schritt 1 — Nutzerdaten abfragen:**
-Frage nach: Name, Anrede, Anthropic API Key, ElevenLabs API Key, Spotify-Song (Link), Programme, Website, Stadt, Obsidian-Pfad (optional)
+Frage nach:
+- Name (z.B. "Julian")
+- Taetigkeit/Rolle (z.B. "KI-Berater und Automatisierungsexperte") — wird in den Systemprompt eingebaut
+- Gewuenschte Anrede (z.B. "Sir", "Chef", oder einfach Vorname)
+- Anthropic API Key (von https://console.anthropic.com)
+- ElevenLabs API Key (von https://elevenlabs.io)
+- Spotify-Song (Link zum Song der beim Start spielen soll)
+- Programme die beim Doppelklatschen starten sollen (z.B. Obsidian, Notion)
+- Website die im Browser aufgehen soll
+- Stadt fuers Wetter (z.B. Hamburg)
+- Obsidian Vault Pfad (optional)
 
 **Schritt 2 — Config erstellen:**
 Erstelle `config.json` aus `config.example.json` mit den Nutzerdaten. Setze den `workspace_path` auf den aktuellen Ordnerpfad.
@@ -163,10 +173,11 @@ Erstelle `config.json` aus `config.example.json` mit den Nutzerdaten. Setze den 
 - Trage die Voice ID in die Config ein
 
 **Schritt 4 — Systemprompt anpassen:**
-Passe den Systemprompt in `server.py` → `build_system_prompt()` an:
-- Name des Nutzers eintragen
-- Gewuenschte Anrede eintragen
-- Stadt fuers Wetter anpassen
+Passe den Systemprompt in `server.py` → `build_system_prompt()` an. Ersetze die hardcoded Werte:
+- "Julian" → Name des Nutzers
+- "KI-Berater und Automatisierungsexperte" → Taetigkeit des Nutzers
+- "Sir" → gewuenschte Anrede des Nutzers
+- "Hamburg" → Stadt des Nutzers (auch in der CITY Variable oben im File und in config.json)
 
 **Schritt 5 — Testen:**
 - Starte den Server: `python server.py`
